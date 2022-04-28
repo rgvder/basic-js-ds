@@ -1,4 +1,5 @@
 const { NotImplementedError } = require('../extensions/index.js');
+const {json} = require("mocha/lib/reporters");
 
 // const { ListNode } = require('../extensions/list-node.js');
 
@@ -22,9 +23,28 @@ const { NotImplementedError } = require('../extensions/index.js');
  *   }
  * }
  */
-function removeKFromList(/* l, k */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function removeKFromList(l, k) {
+  let head = l;
+  let current;
+  let previous;
+
+  if (head.value === k) {
+    l = head.next;
+    head = l;
+  }
+
+  current = head;
+
+  while (current?.next) {
+      while (current && current.value !== k) {
+        previous = current;
+        current = current.next;
+      }
+      previous.next = current?.next || null;
+      current = current?.next || null;
+    }
+
+  return l;
 }
 
 module.exports = {
